@@ -1,61 +1,4 @@
-// import { ReactFlow, Controls, Background } from '@xyflow/react';
-// import type {Node, SelectionDragHandler} from "@xyflow/react"
-// import { useDispatch, useSelector } from 'react-redux';
-// import { RootState } from '../store/store';
-// import { nodePositionChanged } from '../store/actions';
 
-// type FlowNode=Node<{
-//   label: string,
-//   color: string,
-//   fontSize:number
-// }>
-
-// export const GraphContainer = () => {
-//   const dispatch = useDispatch();
-//   const presentState = useSelector((state: RootState) => state.present);
-//   const nodes = presentState.graph.nodes;
-//   const nodeStyling = presentState.nodeStyling;
-//   const edges = presentState.graph.edges;
-
-//   const flowNodes = nodes.map(node => ({
-//     id: node.id,
-//     position: node.position,
-//     data: {
-//       label: node.data.label,
-//       color: nodeStyling[node.id].color,
-//       fontSize: nodeStyling[node.id].fontSize,
-//     },
-//     style: {
-//       backgroundColor: nodeStyling[node.id].color,
-//       fontSize: nodeStyling[node.id].fontSize,
-//     },
-//   }));
-
-//   const flowEdges = edges.map(edge => ({
-//     id: edge.id,
-//     source: edge.source,
-//     target: edge.target,
-//     animated: true,
-//   }));
-
-//   const onNodeDragStop = (_, node) => {
-//     dispatch(nodePositionChanged(node.id, node.position));
-//   };
-
-//   return (
-//     <div style={{ height: '100vh' }}>
-//       <ReactFlow
-//         nodes={flowNodes}
-//         edges={flowEdges}
-//         onNodeDragStop={onNodeDragStop}
-        
-//       >
-//         {/* <Background /> */}
-//         <Controls />
-//       </ReactFlow>
-//     </div>
-//   );
-// };
 
 import { ReactFlow, Controls } from '@xyflow/react';
 import type { NodeMouseHandler, Node} from "@xyflow/react"
@@ -122,14 +65,14 @@ export const GraphContainer = () => {
     }
   }))
 
-  const onNodeDragStop = (event: React.MouseEvent, node:Node) => {
+  const onNodeDragStop = (_event: React.MouseEvent, node:Node) => {
     dispatch(nodePositionChanged(node.id, node.position));
   };
   // const onNodeDragStop = (_, node:Node) => {
   //   dispatch(nodePositionChanged(node.id, node.position));
   // };
 
-  const handleNodeClick:NodeMouseHandler=(event: React.MouseEvent,node:Node)=>{
+  const handleNodeClick:NodeMouseHandler=(_event: React.MouseEvent,node:Node)=>{
     dispatch(nodeSelected(node.id))
   }
   // const handleNodeClick=(_,node:Node)=>{
