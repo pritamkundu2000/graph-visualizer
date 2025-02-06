@@ -47,7 +47,8 @@ export function rootReducer(state: HistoryState = initialState, action: Action):
       return { past: newPast, present: next, future: newFuture };
     }
     default: {
-      const isUndoable = action.meta?.undoable;
+      const isUndoable = 'meta' in action && action.meta?.undoable === true;
+      // const isUndoable = action.meta?.undoable;
       const newPresent = appReducer(state.present, action);
       if (isUndoable) {
         return { past: [...state.past, state.present], present: newPresent, future: [] };
